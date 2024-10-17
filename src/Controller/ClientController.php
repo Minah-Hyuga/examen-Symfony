@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Request;
@@ -10,10 +11,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class ClientController extends AbstractController
 {
     #[Route('/clients', name: 'clients.index', methods: ['GET'])]
-    public function index(): Response
+    public function index(ClientRepository $clientRepository): Response
     {
+        $clients = $clientRepository->findAll();
+        // dd($clients);
         return $this->render('client/index.html.twig', [
-            'controller_name' => 'ClientController',
+            'datas' => $clients,
         ]);
     }
     // fonction pour sauvegarder
@@ -37,7 +40,7 @@ class ClientController extends AbstractController
     //utilisation des query params
     #[Route('/clients/search/telephone', name: 'clients.searchClientByTelephone', methods: ['GET'])]
     //injection de dependence avec les Request $request
-    public function searchClientByTelephone(Request $request): Response
+    public function searchClientByTelephone(): Response
     {
         return $this->render('client/index.html.twig', [
             'controller_name' => 'ClientController',

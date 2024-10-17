@@ -15,9 +15,6 @@ class Client
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]
-    private ?User $utilisateur = null;
-
     /**
      * @var Collection<int, Dette>
      */
@@ -34,7 +31,13 @@ class Client
     private ?string $telephone = null;
 
     #[ORM\Column(length: 80)]
-    private ?string $mail = null;
+    private ?string $email = null;
+
+    #[ORM\OneToOne(inversedBy: 'client', cascade: ['persist', 'remove'])]
+    private ?User $utilisateur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $montant = null;
 
     public function __construct()
     {
@@ -44,18 +47,6 @@ class Client
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUtilisateur(): ?User
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?User $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
     }
 
     /**
@@ -124,14 +115,38 @@ class Client
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string // Corrigé ici
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function setMail(string $mail): static
+    public function setEmail(string $email): static // Corrigé ici
     {
-        $this->mail = $mail;
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getMontant(): ?string
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(string $montant): static
+    {
+        $this->montant = $montant;
 
         return $this;
     }

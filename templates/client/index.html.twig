@@ -88,31 +88,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td class="py-2">Fall</td>
-                                <td class="py-2">Mamadou</td>
-                                <td class="py-2">77 7343484</td>
-                                <td class="py-2">100 000 CFA</td>
+                        {% for client in datas%}
+                         <tr class="text-center">
+                                <td class="py-2">
+                                    {{client.nom}}
+                                </td>
+                                <td class="py-2">
+                                    {{client.prenom}}
+                                </td>
+                                <td class="py-2">
+                                    {{client.telephone}}
+                                </td>
+                                <td class="py-2">
+                                    {{client.montant}}
+                                </td>
                             </tr>
-                            <tr class="text-center">
-                                <td class="py-2">Diop</td>
-                                <td class="py-2">Mariam</td>
-                                <td class="py-2">77 8765784</td>
-                                <td class="py-2">90 000 CFA</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="py-2">Diallo</td>
-                                <td class="py-2">Fatou</td>
-                                <td class="py-2">77 3473874</td>
-                                <td class="py-2">50 000 CFA</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="py-2">Sow</td>
-                                <td class="py-2">Fallou</td>
-                                <td class="py-2">77 3784737</td>
-                                <td class="py-2">30 000 CFA</td>
-                            </tr>
-                        </tbody>
+                            {% endfor %}
+                       </tbody>
                     </table>
                 </div>
             </div>

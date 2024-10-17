@@ -36,6 +36,7 @@ class User
     #[ORM\OneToOne(mappedBy: 'utilisateur', cascade: ['persist', 'remove'])]
     private ?Client $client = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
