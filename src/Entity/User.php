@@ -33,6 +33,9 @@ class User
     #[ORM\Column]
     private ?bool $isBlocked = null;
 
+    #[ORM\OneToOne(mappedBy: 'utilisateur', cascade: ['persist', 'remove'])]
+    private ?Client $client = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,28 @@ class User
     public function setBlocked(bool $isBlocked): static
     {
         $this->isBlocked = $isBlocked;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($client === null && $this->client !== null) {
+            $this->client->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($client !== null && $client->getUtilisateur() !== $this) {
+            $client->setUtilisateur($this);
+        }
+
+        $this->client = $client;
 
         return $this;
     }
